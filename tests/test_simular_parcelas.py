@@ -78,16 +78,16 @@ def test_simular_parcelas(driver):
     )
     el7.click()
 
-# VALIDAÇÃO: verificar se o texto "Parcelas" aparece na tela
+# VALIDAÇÃO: verificar se o texto "Entrada do financiamento" aparece na tela
     elemento_hb20 = wait.until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR,
-        'new UiSelector().textContains("Parcelas")'))
+        'new UiSelector().textContains("Entrada do financiamento")'))
     )
 
     # Faz o assert para garantir que o texto está lá
-    assert "Parcelas" in elemento_hb20.text, "ERROR: O texto 'Parcelas' não foi encontrado na tela do anúncio!"
+    assert "Entrada do financiamento" in elemento_hb20.text, "ERROR: O texto 'Entrada do financiamento' não foi encontrado na tela do anúncio!"
 
-    print("✔ VALIDAÇÃO OK: Encontrado o texto Parcelas na simulação de parcelas")
+    print("✔ VALIDAÇÃO OK: Encontrado o texto Entrada do financiamento na simulação de financiamento")
 
 # TESTE 2 — Deve encontrar HB20 S e clicar em simular parcelas e clicar em continuar
 def test_simular_parcelas_continuar(driver):
@@ -163,11 +163,19 @@ def test_simular_parcelas_continuar(driver):
     )
     el7.click()
 
-# comando scroll para garantir que o botão continuar esteja visível
-    driver.swipe(500, 1500, 500, 500, 800)
-    time.sleep(2)
+    # Rola a tela até encontrar o botão "Continuar" usando UiScrollable.
+    # Esta é uma forma mais robusta do que usar swipe com coordenadas fixas.
+    continuar_selector = 'new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text("Continuar"))'
     el8 = wait.until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 
-        'new UiSelector().text("Continuar")'))
+        continuar_selector))
     )
     el8.click()
+
+    # VALIDAÇÃO 1: Verificar se o campo "Identificação" está visível
+    identificacao_element = wait.until(
+        EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR,
+        'new UiSelector().text("Identificação")'))
+    )
+    assert identificacao_element.is_displayed(), "O campo 'Identificação' não está visível na tela."
+    print("✔ VALIDAÇÃO OK: Campo 'Identificação' encontrado.")
