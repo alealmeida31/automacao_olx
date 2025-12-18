@@ -1,0 +1,15 @@
+# Cache do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Cache do pytest
+.pytest_cache/
+
+# Build
+build/
+dist/
+
+# venv
+.venv/

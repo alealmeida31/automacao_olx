@@ -33,8 +33,11 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
    ```
 2. Crie a venv e ative
    ```sh
-   python3.11 -m venv .venv
-   source .venv/bin/activate
+   python3.11 -m venv .venv - MAC
+   source .venv/bin/activate - MAC
+
+   python -m venv .venv - Windows
+   .venv\Scripts\Activate.ps1 - Windows
    ```
 3. Installe o Appium Client
    ```sh
