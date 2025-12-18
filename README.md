@@ -18,7 +18,7 @@ Projeto de automação de testes mobile para o aplicativo OLX, desenvolvido como
 ## Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
-- [Python 3](https://www.python.org/downloads/)
+- [Python 3.11](https://www.python.org/downloads/)
 - [Node.js e npm](https://nodejs.org/en/)
 - [Appium Server](https://appium.io/docs/en/about-appium/getting-started/): `npm install -g appium`
 - Appium Doctor: `npm install -g appium-doctor` para verificar a instalação.
@@ -31,11 +31,19 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
    git clone https://github.com/alealmeida31/automacao_olx.git
    cd automacao_olx
    ```
-2. Instale as dependências do Python:
+2. Crie a venv e ative
+   ```sh
+   python3.11 -m venv .venv
+   source .venv/bin/activate
+   ```
+3. Installe o Appium Client
+   ```sh
+   pip install pytest Appium-Python-Client
+   ```
+4. Instale as dependências do Python:
    ```sh
    pip install -r requirements.txt
    ```
-
 ## Executando os Testes
 
 1. Inicie o servidor Appium em um terminal:
