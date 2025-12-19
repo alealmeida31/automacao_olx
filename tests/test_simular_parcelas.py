@@ -82,9 +82,11 @@ def test_simular_parcelas(driver):
     )
     el6.click()
 
+    # Scroll até encontrar "Simular parcelas" usando UiScrollable para garantir visibilidade
+    simular_selector = 'new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text("Simular parcelas"))'
     el7 = wait.until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 
-        'new UiSelector().text("Simular parcelas")'))
+        simular_selector))
     )
     el7.click()
 
@@ -167,6 +169,9 @@ def test_simular_parcelas_continuar(driver):
         'new UiSelector().textContains("HB20")'))
     )
     el5.click()
+    
+    # Aguarda carregamento
+    time.sleep(2)
 
     el6 = wait.until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 
@@ -174,9 +179,11 @@ def test_simular_parcelas_continuar(driver):
     )
     el6.click()
 
+    # Scroll até encontrar "Simular parcelas" usando UiScrollable
+    simular_selector = 'new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text("Simular parcelas"))'
     el7 = wait.until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 
-        'new UiSelector().text("Simular parcelas")'))
+        simular_selector))
     )
     el7.click()
 
