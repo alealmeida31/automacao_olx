@@ -53,19 +53,20 @@ def test_simular_parcelas(driver):
     el3.click()
     el3.send_keys("hb20 s")
 
-    # Aguarda o botão ou item da lista
-    el4 = wait.until(
-        EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR,
-        'new UiSelector().className("android.view.View").instance(8)'))
-    )
-    el4.click()
+    # Aguarda carregamento das sugestões
+    time.sleep(2)
+    # Pressiona ENTER no teclado para buscar
+    try:
+        driver.execute_script('mobile: performEditorAction', {'action': 'search'})
+    except Exception:
+        driver.press_keycode(66)
 
     el5 = wait.until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR,
-        'new UiSelector().className("android.view.View").instance(6)'))
+        'new UiSelector().textContains("hb20 s")'))
     )
     el5.click()
-
+    driver.press_keycode(66)
     el6 = wait.until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 
         'new UiSelector().className("android.view.View").instance(8)'))
@@ -138,16 +139,17 @@ def test_simular_parcelas_continuar(driver):
     el3.click()
     el3.send_keys("hb20 s")
 
-    # Aguarda o botão ou item da lista
-    el4 = wait.until(
-        EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR,
-        'new UiSelector().className("android.view.View").instance(8)'))
-    )
-    el4.click()
+    # Aguarda carregamento das sugestões
+    time.sleep(2)
+    # Pressiona ENTER no teclado para buscar
+    try:
+        driver.execute_script('mobile: performEditorAction', {'action': 'search'})
+    except Exception:
+        driver.press_keycode(66)
 
     el5 = wait.until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR,
-        'new UiSelector().className("android.view.View").instance(6)'))
+        'new UiSelector().textContains("HB20")'))
     )
     el5.click()
 

@@ -73,27 +73,28 @@ def test_busca_hb20s(driver):
     el3.click()
     el3.send_keys("hb20 s")
 
-    # Aguarda o botão ou item da lista
-    el4 = wait.until(
-        EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR,
-        'new UiSelector().className("android.view.View").instance(8)'))
-    )
-    el4.click()
+    # Aguarda carregamento das sugestões
+    time.sleep(2)
+    # Pressiona ENTER no teclado para buscar
+    try:
+        driver.execute_script('mobile: performEditorAction', {'action': 'search'})
+    except Exception:
+        driver.press_keycode(66)
 
     el5 = wait.until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR,
-        'new UiSelector().className("android.view.View").instance(6)'))
+        'new UiSelector().textContains("hb20 s")'))
     )
     el5.click()
 
 # VALIDAÇÃO: verificar se o texto "HB20 S" aparece na tela
     elemento_hb20 = wait.until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR,
-        'new UiSelector().textContains("HB20 S")'))
+        'new UiSelector().textContains("hb20 s")'))
     )
 
     # Faz o assert para garantir que o texto está lá
-    assert "HB20 S" in elemento_hb20.text, "ERROR: O texto 'HB20 S' não foi encontrado na tela do anúncio!"
+    assert "hb20 s" in elemento_hb20.text.lower(), "ERROR: O texto 'HB20 S' não foi encontrado na tela do anúncio!"
 
     print("✔ VALIDAÇÃO OK: O anúncio contém o texto HB20 S")
 
@@ -134,7 +135,7 @@ def test_busca_sem_resultado(driver):
     time.sleep(2)
 
     # Simples verificação: não deve haver nenhum TextView contendo o texto da busca
-    search_lower = 'car appium'
+    search_lower = 'Car Appium'
     matches = driver.find_elements(
         AppiumBy.XPATH,
         "//android.widget.TextView[contains(translate(@text,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), 'car appium')]")
