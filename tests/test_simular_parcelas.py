@@ -61,12 +61,21 @@ def test_simular_parcelas(driver):
     except Exception:
         driver.press_keycode(66)
 
+    # Garante que o teclado esteja fechado
+    try:
+        driver.hide_keyboard()
+    except Exception:
+        pass
+
     el5 = wait.until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR,
         'new UiSelector().textContains("hb20 s")'))
     )
     el5.click()
-    driver.press_keycode(66)
+
+    # Aguarda carregamento
+    time.sleep(2)
+
     el6 = wait.until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 
         'new UiSelector().className("android.view.View").instance(8)'))
@@ -146,6 +155,12 @@ def test_simular_parcelas_continuar(driver):
         driver.execute_script('mobile: performEditorAction', {'action': 'search'})
     except Exception:
         driver.press_keycode(66)
+
+    # Garante que o teclado esteja fechado
+    try:
+        driver.hide_keyboard()
+    except Exception:
+        pass
 
     el5 = wait.until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR,

@@ -13,3 +13,5 @@ dist/
 
 # venv
 .venv/
+debug_olx.png
+debug_olx_page.xml

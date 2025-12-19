@@ -81,6 +81,12 @@ def test_busca_hb20s(driver):
     except Exception:
         driver.press_keycode(66)
 
+    # Garante que o teclado esteja fechado para não cobrir os resultados
+    try:
+        driver.hide_keyboard()
+    except Exception:
+        pass
+
     el5 = wait.until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR,
         'new UiSelector().textContains("hb20 s")'))
