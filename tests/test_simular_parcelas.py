@@ -83,7 +83,7 @@ def test_simular_parcelas(driver):
     el6.click()
 
     # Scroll até encontrar "Simular parcelas" usando UiScrollable para garantir visibilidade
-    simular_selector = 'new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text("Simular parcelas"))'
+    simular_selector = 'new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().textContains("Simular parcelas"))'
     el7 = wait.until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 
         simular_selector))
@@ -180,20 +180,15 @@ def test_simular_parcelas_continuar(driver):
     el6.click()
 
     # Scroll até encontrar "Simular parcelas" usando UiScrollable
-    simular_selector = 'new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text("Simular parcelas"))'
+    simular_selector = 'new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().textContains("Simular parcelas"))'
     el7 = wait.until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 
         simular_selector))
     )
     el7.click()
 
-    # Rola a tela até encontrar o botão "Continuar" usando UiScrollable.
-    # Esta é uma forma mais robusta do que usar swipe com coordenadas fixas.
-    continuar_selector = 'new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text("Continuar"))'
-    el8 = wait.until(
-        EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 
-        continuar_selector))
-    )
+    # Clicar no botão "Continuar" 
+    el8 = driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value="new UiSelector().className(\"android.widget.Button\").instance(2)")
     el8.click()
 
     # VALIDAÇÃO 1: Verificar se o campo "Identificação" está visível
